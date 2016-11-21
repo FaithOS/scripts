@@ -1,6 +1,5 @@
 #!/bin/bash
 #
-#
 #判断当前系统
 USERA=secneo
 PD_USER() {
@@ -290,7 +289,7 @@ EOF
     fi
 
 }
-add_iptables(){
+centos_add_iptables(){
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 
 echo "+++++ display iptables rules +++++"
@@ -323,12 +322,48 @@ echo "+++++ compeleted +++++"
 
 }
 
+ubuntu_add_iptables(){
+
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+
+echo "+++++ display iptables rules +++++"
+iptables -L -n
+EOF
+iptables -P OUTPUT ACCEPT
+iptables -P FORWARD ACCEPT
+echo "+++++ clean iptables rules +++++"
+iptables -F
+iptables -X
+echo "+++++ init iptables rules +++++"
+iptables -A INPUT -s 111.207.253.210/32 -j ACCEPT
+iptables -A INPUT -s 42.62.59.208/28 -j ACCEPT
+iptables -A INPUT -s 42.62.15.1/29 -j ACCEPT
+iptables -A INPUT -s 192.168.0.0/24 -j ACCEPT
+iptables -A INPUT -p udp -m udp --dport 53 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 53 -j ACCEPT
+iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A INPUT -p icmp -j ACCEPT
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
+iptables -A INPUT -j REJECT --reject-with icmp-host-prohibited
+iptables -A FORWARD -j REJECT --reject-with icmp-host-prohibited
+echo "+++++ display iptables rules +++++"
+iptables -L -n
+
+iptables-save > /etc/iptables.up.rules
+        echo "pre-up iptables-restore < /etc/iptables.up.rules " >> /etc/network/interfaces
+        echo "post-down iptables-save > /etc/iptables.up.rules" >> /etc/network/interfaces
+
+
+}
+
+
 INSTALL_Ubuntu() {
 ubuntu_change_apt_source 
 ubuntu_change_ssh_auth
 ubuntu_add_auth_key
 ubuntu_add_user
-add_iptables
+ubuntu_add_iptables
 }
 
 INSTALL_CentOS (){
@@ -336,7 +371,7 @@ centos_add_user
 centos_add_auth_key
 centos_change_ssh_auth
 centos_change_yum_repo
-add_iptables
+centos_add_iptables
 }
 PD_USER
 
