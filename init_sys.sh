@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-
+#
 #判断当前系统
 USERA=secneo
 PD_USER() {
