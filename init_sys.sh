@@ -1,14 +1,47 @@
 #!/bin/bash
 #
 #判断当前系统
+
+CU_install(){
 USERA=secneo
 PD_USER() {
 if [ `id -u` -ne 0 ];then
     echo "This scripts must run with root !!!"
     exit 1
 fi
+}
+
+DISABLED_ipv6(){
+cat >> /etc/sysctl.conf<<EOF 
+root@ubuntu:~#  sudo sysctl -p 
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+EOF
 
 }
+
+DISABLED_selinux(){
+ SE=`getenforce 0`
+if [ $SE != 'Permissive' -a  $SE != 'Disabled'   ];then
+setenforce 0
+sed -i  '7s/enforcing/disabled/' /etc/selinux/config 
+fi
+}
+
+DISABLED_ulimit(){
+cat >>/etc/security/limits.conf<<EOF
+* soft   nofile  65535
+* hard nofile 65536
+EOF
+}
+
+DISABLED_ipv6
+DISABLED_selinux
+DISABLED_ulimit
+}
+
+
 
 centos_add_user () {
     echo "##################添加用户$USERA######################"
@@ -151,9 +184,7 @@ EOF
 }
 
 
-
-
-
+#===========start ubuntu============
 
 ubuntu_add_user () {
     echo "##################添加用户$USERA######################"
@@ -373,7 +404,8 @@ centos_change_ssh_auth
 centos_change_yum_repo
 centos_add_iptables
 }
-PD_USER
+
+CU_install
 
 SYSA=`cat /etc/issue | sed -n '1p' |awk '{print $1}'`
 if [ $SYSA == CentOS -o $SYSA == Ubuntu  ];then
