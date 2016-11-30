@@ -15,3 +15,5 @@ GITHUB=`grep github $basedir/.git/config  | awk '{print $3}'`
 else
     echo 'git config file is not exist'
 fi
+#Ubunut下的http 少了一个s 
+#url = http://github.com/FaithOS/scripts.git
