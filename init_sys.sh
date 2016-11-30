@@ -394,7 +394,7 @@ ubuntu_change_apt_source
 ubuntu_change_ssh_auth
 ubuntu_add_auth_key
 ubuntu_add_user
-ubuntu_add_iptables
+#ubuntu_add_iptables
 }
 
 INSTALL_CentOS (){
@@ -402,7 +402,7 @@ centos_add_user
 centos_add_auth_key
 centos_change_ssh_auth
 centos_change_yum_repo
-centos_add_iptables
+#centos_add_iptables
 }
 
 CU_install
