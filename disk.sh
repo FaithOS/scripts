@@ -7,7 +7,7 @@
 #Blog：       jianguoa.wang
 #Company:     XX
 #Version:     1.0
-#Date：       2016-11-29
+#Date：       2016-11-30
 #########################################
 #该脚本适应于cenos 和ubuntu系统
 SYS_DIS=`fdisk -l 2>&1 | egrep "^\/" |awk '{if ($2~/\*/) print $1 }'`
@@ -24,9 +24,9 @@ DISK_TOTL=`lsblk -l | awk '{if ($6~/disk/) print $1}'|wc -l`
 for ((a=0;a<="$DISK_TOTL";a++));do
     if [ "${DISK_SUM[$a]}" != "$A" ];then
     B="${DISK_SUM[$a]}"
-    BB=`fdisk -l 2>&1 | grep "${DISK_SUM[$a]}" |awk -F '[ :]' '{print $2}'`
+    BB=`fdisk -l 2>&1 | grep "${DISK_SUM[$a]}" |awk -F '[ :]' '{if($0~/\:/) print $2 }'`
 ##判断数据盘是否被格式化过
-    DATA=`fdisk -l 2>&1 | grep "$B" |wc -l`
+    DATA=`fdisk -l 2>&1 | grep "$B" |awk -F '[ :]' '{if($0~/\:/) print $2 }' |wc -l`
         if [ $DATA  -le 1  ];then
             echo "${BB} 是数据盘可以初始化。"
 fdisk $BB <<EOF 2>&1
@@ -43,7 +43,7 @@ EOF
 		if [ ! -d /data"${a}"  ];then
 		    mkdir /data"${a}"
 		    UUID=`blkid "${C}"|awk -F ' ' '{print $2}'`
-		    echo  "  $UUID       /data$a      ext4    defaults        0       0"  >>/etc/fstab	   
+		    echo  "$UUID       /data$a      ext4    defaults        0       0"  >>/etc/fstab	   
 		    mount -a 
 			if [ $? -eq  0   ];then
     		    	    echo -e "\033[31m 磁盘挂载成功。\033[0m"
@@ -54,6 +54,7 @@ EOF
             break
         else
             echo "${DISK_SUM[$a]}  已经初始化过了。"
+	    
         fi
     fi
 done
