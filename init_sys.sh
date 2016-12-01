@@ -22,10 +22,12 @@ EOF
 }
 
 DISABLED_selinux(){
- SE=`getenforce 0`
+SE=`getenforce 0`
+if [ ! -z $SE  ];then
 if [ $SE != 'Permissive' -a  $SE != 'Disabled'   ];then
 setenforce 0
 sed -i  '7s/enforcing/disabled/' /etc/selinux/config 
+fi
 fi
 }
 
