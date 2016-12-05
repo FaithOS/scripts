@@ -63,7 +63,7 @@ done
 rm -rf $PWD/$0
 
 INSTALL_CentOS(){
-cat >> /etc/rc.d/rc.local <<EOF
+cat > /etc/rc.d/rc.local <<EOF
 #!/bin/sh
 #
 # This script will be executed *after* all the other init scripts.
@@ -76,7 +76,7 @@ EOF
 }
 
 INSTALL_Ubuntu(){
-cat >>/etc/rc.local <<EOF
+cat >/etc/rc.local <<EOF
 #!/bin/sh -e
 #
 # rc.local
