@@ -10,6 +10,7 @@
 #Date：       2016-11-30
 #########################################
 #该脚本适应于cenos 和ubuntu系统
+PWD=`pwd`
 SYS_DIS=`fdisk -l 2>&1 | egrep "^\/" |awk '{if ($2~/\*/) print $1 }'`
 SYS_DIS_TWO=`df -h  | grep 'boot' |awk '{print $1}'`
 DISK_SUM=(`lsblk -l | awk '{if ($6~/disk/) print $1}'`)
@@ -58,3 +59,16 @@ EOF
         fi
     fi
 done
+### 脚本执行完后自杀
+rm -rf $PWD/$0
+cat >> /etc/rc.d/rc.local <<EOF
+#!/bin/sh
+#
+# This script will be executed *after* all the other init scripts.
+# You can put your own initialization stuff in here if you don't
+# want to do the full Sys V style init stuff.
+
+touch /var/lock/subsys/local
+EOF
+##
+
