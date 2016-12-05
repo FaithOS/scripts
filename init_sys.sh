@@ -182,6 +182,9 @@ EOF
     	yum clean all
     	yum makecache
     fi
+if [ $? -eq 0 ];then
+   yum install lrzsz dos2unix git vim sysstat iftop iotop tmux  unzip -y
+fi
 }
 
 
