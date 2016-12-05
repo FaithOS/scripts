@@ -427,3 +427,9 @@ else
        echo   CentOS7
    fi
 fi
+
+#清理痕迹
+
+rm -rf /root/scripts
+rm -rf /root/init_sys.sh
+history -c
