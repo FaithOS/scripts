@@ -61,6 +61,8 @@ EOF
 done
 ### 脚本执行完后自杀
 rm -rf $PWD/$0
+
+INSTALL_CentOS(){
 cat >> /etc/rc.d/rc.local <<EOF
 #!/bin/sh
 #
@@ -70,5 +72,43 @@ cat >> /etc/rc.d/rc.local <<EOF
 
 touch /var/lock/subsys/local
 EOF
-##
+
+}
+
+INSTALL_Ubuntu(){
+cat >>/etc/rc.local <<EOF
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+exit 0
+EOF
+
+}
+
+SYSA=`cat /etc/issue | sed -n '1p' |awk '{print $1}'`
+if [ $SYSA == CentOS -o $SYSA == Ubuntu  ];then
+    if [[ $SYSA == CentOS  ]];then
+        INSTALL_CentOS
+    elif [[ $SYSA == Ubuntu  ]];then
+        INSTALL_Ubuntu
+    elif [[ $SYSB == CentOS   ]];then
+        INSTALL_CentOS
+    fi
+else
+   SYSB=`cat /etc/redhat-release | sed -n '1p' |awk '{print $1}'`
+   if [[ $SYSB == CentOS  ]];then
+       INSTALL_CentOS
+       echo   CentOS7
+   fi
+fi
 
