@@ -72,6 +72,9 @@ cat > /etc/rc.d/rc.local <<EOF
 
 touch /var/lock/subsys/local
 EOF
+N_IP=`ifconfig  |sed -n 2p | awk -F ':|B' '{print $2}'`
+echo "$N_IP  $HOSTNAME" >> /etc/hosts
+sed -i "s/localhost.localdomain/$HOSTNAME/g" /etc/sysconfig/network
 
 }
 
@@ -92,6 +95,10 @@ cat >/etc/rc.local <<EOF
 
 exit 0
 EOF
+
+N_IP=`ifconfig  |sed -n 2p | awk -F ':|B' '{print $2}'`
+echo "$N_IP  $HOSTNAME" >> /etc/hosts
+echo $HOSTNAME  >> /etc/hostname
 
 }
 
