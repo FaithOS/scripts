@@ -75,7 +75,9 @@ EOF
 N_IP=`ifconfig  |sed -n 2p | awk -F ':|B' '{print $2}'`
 echo "$N_IP  $HOSTNAME" >> /etc/hosts
 sed -i "s/localhost.localdomain/$HOSTNAME/g" /etc/sysconfig/network
-
+sed -i "s/Hostname=/Hostname=$N_IP/g" /usr/local/zabbix-agent/etc/zabbix_agentd.conf
+chkconfig zabbix_agentd on
+service zabbix_agentd start
 }
 
 INSTALL_Ubuntu(){
@@ -99,17 +101,23 @@ EOF
 N_IP=`ifconfig  |sed -n 2p | awk -F ':|B' '{print $2}'`
 echo "$N_IP  $HOSTNAME" >> /etc/hosts
 echo $HOSTNAME  >> /etc/hostname
-
+sed -i "s/Hostname=/Hostname=$N_IP/g" /usr/local/zabbix-agent/etc/zabbix_agentd.conf
+update-rc.d zabbix-agent defaults
+service zabbix-agent start
+/usr/local/zabbix-agent/sbin/zabbix_agentd -c /usr/local/zabbix-agent/etc/zabbix_agentd.conf
 }
 
 SYSA=`cat /etc/issue | sed -n '1p' |awk '{print $1}'`
 if [ $SYSA == CentOS -o $SYSA == Ubuntu  ];then
     if [[ $SYSA == CentOS  ]];then
         INSTALL_CentOS
+	rm -rf $PWD/$0
     elif [[ $SYSA == Ubuntu  ]];then
         INSTALL_Ubuntu
+	rm -rf $PWD/$0
     elif [[ $SYSB == CentOS   ]];then
         INSTALL_CentOS
+	rm -rf $PWD/$0
     fi
 else
    SYSB=`cat /etc/redhat-release | sed -n '1p' |awk '{print $1}'`
