@@ -60,7 +60,7 @@ EOF
     fi
 done
 ### 脚本执行完后自杀
-rm -rf $PWD/$0
+#rm -rf $PWD/$0
 
 INSTALL_CentOS(){
 cat > /etc/rc.d/rc.local <<EOF
