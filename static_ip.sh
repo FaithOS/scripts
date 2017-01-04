@@ -196,8 +196,8 @@ address $NET.$LASTOCT
 hwaddress ether $HWADDR1
 netmask 255.255.255.0
 network $NET.0
-up route add -net 10.117.0.0 netmask 255.255.255.0 gw $NET.1
-down route del -net 10.117.0.0 netmask 255.255.255.0 gw $NET.1
+#up route add -net 10.117.0.0 netmask 255.255.255.0 gw $NET.1
+#down route del -net 10.117.0.0 netmask 255.255.255.0 gw $NET.1
 CFGINTERFACES
 
 	# Build /etc/hosts
