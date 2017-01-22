@@ -15,9 +15,9 @@ LOGFILE="/tmp/Email.log"
 exec 1>"$LOGFILE"
 exec 2>&1
 SMTP_server='smtp.qiye.163.com'                            #SMTP服务器，变量值需要自行修改
-username='jianguo.wang@secneo.com'                                 #用户名，变量值需要自行修改
-password='BangBang0824'                                     #密码，变量值需要自行修改
-from_email_address='jianguo.wang@secneo.com'                  #发件人Email地址，变量值需要自行修改
+username='jianguo.wang@xxx.com'                                 #用户名，变量值需要自行修改
+password='xxx'                                     #密码，变量值需要自行修改
+from_email_address='jianguo.wang@xxx.com'                  #发件人Email地址，变量值需要自行修改
 to_email_address="$1"                                        #收件人Email地址，zabbix传入的第一个参数
 message_subject_utf8="$2"                                 #邮件标题，zabbix传入的第二个参数
 message_body_utf8="$3"                                    #邮件内容，zabbix传入的第三个参数
