@@ -1,0 +1,111 @@
+# Orchestra - Ubuntu Server Installation
+# * Minimal install 
+# * Cloud-init for bare-metal
+# * Grab meta-data and user-data from cobbler server in a late command
+
+# Locale 
+d-i     debian-installer/locale string en_US.UTF-8
+
+# No splash
+d-i     debian-installer/splash boolean false
+
+# Keyboard layout
+d-i     console-setup/ask_detect        boolean false
+d-i     console-setup/layoutcode        string us
+d-i     console-setup/variantcode       string
+###no_update===
+d-i pkgsel/upgrade select none
+d-i pkgsel/update-policy select none
+popularity-contest popularity-contest/participate boolean false
+
+
+
+# Network configuration
+d-i     netcfg/get_nameservers  string 114.114.114.114
+d-i     netcfg/get_ipaddress    string
+d-i     netcfg/get_netmask      string 255.255.255.0
+d-i     netcfg/get_gateway      string
+d-i     netcfg/confirm_static   boolean true
+
+# Local clock (set to UTC and use ntp)
+d-i     clock-setup/utc boolean true
+d-i     clock-setup/ntp boolean true
+d-i     clock-setup/ntp-server  string $http_server
+d-i     time/zone string Asia/Shanghai
+d-i     live-installer/net-image        string http://$http_server/cobbler/links/$distro_name/install/filesystem.squashfs
+### Partitioning
+
+####2016-12-14#####wjg####auto-partman####kvm vda###
+d-i partman-auto/disk string /dev/sda
+d-i partman-auto/method string regular
+d-i partman-lvm/device_remove_lvm boolean true
+d-i partman-md/device_remove_md boolean true
+d-i partman-lvm/confirm boolean true
+
+
+d-i partman/default_filesystem string ext4
+d-i partman-partitioning/confirm_write_new_label boolean true
+d-i partman/choose_partition select finish
+d-i partman/confirm boolean true
+d-i partman/confirm_nooverwrite boolean true
+d-i partman/mount_style select uuid
+
+
+
+# Use server kernel
+d-i     base-installer/kernel/image     string linux-server
+
+# Account setup
+d-i passwd/root-login boolean root
+d-i passwd/root-password password 123123
+d-i passwd/root-password-again password 123123
+d-i user-setup/allow-password-weak boolean true
+d-i passwd/make-user boolean true
+d-i user-setup/encrypt-home boolean true
+d-i passwd/user-fullname string secneo
+d-i passwd/username string secneo
+d-i passwd/user-password password vm@u7i8o9p0
+d-i passwd/user-password-again password vm@u7i8o9p0
+
+
+# APT
+$SNIPPET('orchestra_proxy')
+
+# By default the installer requires that repositories be authenticated
+# using a known gpg key. This setting can be used to disable that
+# authentication. Warning: Insecure, not recommended.
+d-i debian-installer/allow_unauthenticated string false
+
+# Lang
+d-i     pkgsel/language-packs   multiselect en
+d-i     pkgsel/update-policy    select none
+d-i     pkgsel/updatedb boolean false
+
+# Boot-loader
+d-i     grub-installer/skip     boolean false
+d-i     lilo-installer/skip     boolean false
+d-i     grub-installer/only_debian      boolean true
+d-i     grub-installer/with_other_os    boolean true
+d-i     finish-install/keep-consoles    boolean false
+d-i     finish-install/reboot_in_progress       note
+
+# Eject cdrom
+d-i     cdrom-detect/eject      boolean true
+
+# Do not halt/poweroff after install
+d-i     debian-installer/exit/halt      boolean false
+d-i     debian-installer/exit/poweroff  boolean false
+d-i	pkgsel/include string      vim openssh-server ntp lvm2
+
+
+# Set cloud-init data source to manual seeding
+cloud-init      cloud-init/datasources  multiselect     NoCloud
+
+
+
+# Post scripts. Executes late command and disables PXE
+#d-i preseed/late_command string \
+#in-target wget -O /root/desktop-bootstrap.sh "http://172.16.31.222/desktop-bootstrap.sh"; \
+#in-target chmod +x /root/desktop-bootstrap.sh; \
+#in-target bash /root/desktop-bootstrap.sh; \
+#in-target cp /var/log/syslog /target/root/log/install-syslog;
