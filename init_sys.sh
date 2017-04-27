@@ -21,6 +21,8 @@ EOF
 }
 
 DISABLED_selinux(){
+SYSUBUNTU=`cat /etc/issue |awk '{print $1}'|sed -n 1p'
+if [[ $SYSUBUNTU != Ubuntu  ]];then
 SE=`getenforce 0`
 if [ ! -z $SE  ];then
 if [ $SE != 'Permissive' -a  $SE != 'Disabled'   ];then
@@ -430,6 +432,5 @@ fi
 
 #清理痕迹
 
-rm -rf /root/scripts
 rm -rf /root/init_sys.sh
 history -c
