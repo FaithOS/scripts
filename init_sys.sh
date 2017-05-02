@@ -21,15 +21,18 @@ EOF
 }
 
 DISABLED_selinux(){
-SYSUBUNTU=`cat /etc/issue |awk '{print $1}'|sed -n 1p'
+
+SYSUBUNTU=`cat /etc/issue |awk '{print $1}'|sed -n 1p`
 if [[ $SYSUBUNTU != Ubuntu  ]];then
-SE=`getenforce 0`
-if [ ! -z $SE  ];then
-if [ $SE != 'Permissive' -a  $SE != 'Disabled'   ];then
-setenforce 0
-sed -i  '7s/enforcing/disabled/' /etc/selinux/config 
+    SE=`getenforce 0`
+    if [ ! -z $SE  ];then
+        if [[ $SE != 'Permissive' -a  $SE != 'Disabled'  ]];then
+            setenforce 0
+            sed -i  '7s/enforcing/disabled/' /etc/selinux/config 
+        fi
+    fi
 fi
-fi
+
 }
 
 DISABLED_ulimit(){
