@@ -7,7 +7,7 @@ ETH0=`ip addr  | awk  -F '2:' '{print $2}' |awk  -F ':' '{print $1}'  | awk NF|a
 ATTR=`ip addr |grep -C 1 "$ETH0": |sed -n 3p |awk -F ' ' '{print $2}'`
 LOCAL_IP=`ifconfig  ${ETH0} | sed -n 2p |awk '{print $2}'`
 LOCAL_NETMASK=`ifconfig  ${ETH0} | sed -n 2p |awk '{print $4}'`
-LOCAL_GATEWAY=`netstat -r  | grep default |awk '{print $2}'`
+LOCAL_GATEWAY=`route -n  |awk '{if($0 ~/eth0/) print $2}'|sed -n 1p`
 
 INSTALL_ETH0 (){
 if [ ${ETH0} != eth0  ];then
