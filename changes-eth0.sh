@@ -44,7 +44,7 @@ else
     echo no
     exit 0
 fi
-
+echo  'nameserver  114.114.114.114' >> /etc/resolv.conf
 route add  default gw 172.16.31.254
 yum install net-tools -y 
 service iptables stop
