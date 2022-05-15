@@ -1,0 +1,2 @@
+     1	# 时间同步 install_chrony.sh
+     2	# 配置静态IP static_ip.sh

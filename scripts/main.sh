@@ -16,5 +16,6 @@ main (){
 
 CHECK_OS
 CHECK_USER
+SELECT_LIST
 }
 main
