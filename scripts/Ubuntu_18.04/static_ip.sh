@@ -12,12 +12,12 @@ cat >/etc/netplan/00-installer-config.yaml<<-EOF
 network:
   ethernets:
     ${INTER_NAME}:
- 	 dhcp4: no
-  	 addresses: [ ${INTER_IP} ]
-	 optional: true
-  	 gateway4: ${GATEWAY}
- 	 nameservers:
-  		addresses: [114.114.114.114]
+         dhcp4: no
+         addresses: [ ${INTER_IP} ]
+         optional: true
+         gateway4: ${GATEWAY}
+         nameservers:
+       	       addresses: [114.114.114.114]
   version: 2
 EOF
 
