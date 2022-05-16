@@ -1,10 +1,5 @@
 #! /bin/bash
-ZD=`awk  '{print $3}' test/new_new.txt`
-array=($ZD)
-length=${#array[@]}
-for ((i=0; i<$length; i++))
-do
-	    echo ${array[$i]}
-    done
-
-
+ETH0=`ip addr  | awk  -F '2:' '{print $2}' |awk  -F ':' '{print $1}'  | awk NF|awk '{sub("^ *","");sub(" *$","");print}'  |sed -n 1p`
+ATTR=`ip addr |grep -C 1 "$ETH0": |sed -n 3p |awk -F ' ' '{print $2}'`
+echo $ETH0
+echo $ATTR
