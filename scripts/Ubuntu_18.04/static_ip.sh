@@ -5,8 +5,10 @@
 echo "Ubuntu18.04 配置静态IP  测试ok"
 
 cp -r /etc/netplan/00-installer-config.yaml  /etc/netplan/00-installer-config.yaml_`date +%F` 
-
-cat > /etc/netplan/00-installer-config.yaml <EOF
+# EOF 格式
+###cat >/file.txt<<-EOF #这里的-EOF 表述如果EOF 后面有空格也作为制表符，注意：EOF前后都不应有空格或其他符号。
+###EOF
+cat >/etc/netplan/00-installer-config.yaml<<-EOF
 network:
   ethernets:
     ${INTER_NAME}:
