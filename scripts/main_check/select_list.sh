@@ -4,14 +4,14 @@ SELECT_LIST(){
 
 	   if [ $var == YES -o $var == yes  ];then
 ####判断tmp 目录是否为空，如果不为空，就删除这个目录重新创建
-		TMPDIR_NUM=`ls -A "${TMPDIR}" |wc -l` 
-   		if [  -z ${TMPDIR_NUM}   ]; then
-		 	mkdir	 ${TMPDIR} 
-		
-		else
-		   [[ "${TMPDIR_NUM}" -gt 0  ]] && rm -rf  ${TMPDIR}/describe*  
-	   	fi	     
-
+	   	if  [ -e "${TMPDIR}"   ]
+ 		then
+                TMPDIR_NUM=`ls -A "${TMPDIR}" |wc -l`
+		[[ "${TMPDIR_NUM}" -gt 0  ]]  &&  rm -rf  ${TMPDIR}/describe*
+                else
+                           mkdir ${TMPDIR}
+                fi
+#############开始制作菜单
 	   for  A in `ls ${OS_NAME_VERSION}`		#赋值A，为当前系统下的所有脚本名称
 	   do 
 		   sed -n '2p' ${OS_NAME_VERSION}/"$A" >>${TMPDIR}/describe.txt		#将所有脚本的第二行内容打印到test/new.txt 文件内
