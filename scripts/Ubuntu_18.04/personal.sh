@@ -3,23 +3,18 @@
 #
 
 #Persional=PERSONALDIR
-###
+###新的菜单只需要替换 ${PERSONALDIR} 和Persional 相关的文件即可使用 
+###二级菜单的环境变量 ${PERSONALDIR} 在文件check_OS.sh内定义  
 PERSONAL_LIST(){
 	   read -p  "是否要进行个性化设置(YES/NO) :" var
            echo "######################################"
 	   if [ $var == YES -o $var == yes  ];then
-####判断tmp 目录是否为空，如果不为空，就删除这个目录重新创建
-   	#	if [[  ! -d  ${TMPDIR}  ]]; then
-	#	 	mkdir -pv "${TMPDIR}"
-	#	else
-	#	 [[  -f ${TMPDIR}/Persional_file.txt   ]]  && rm -rf ${TMPDIR}/Persional_file* 
-	#  	fi	     
-	#export  Persional=PERSONALDIR
+##########开始制作菜单
 
-	   for  A in `ls ${PERSONALDIR}`		#赋值A，为当前系统下的所有脚本名称
-	   do 
+	      for  A in `ls ${PERSONALDIR}`		#赋值A，为当前系统下的所有脚本名称
+	      do 
 		   sed -n '2p' ${PERSONALDIR}/"$A" >>${TMPDIR}/Persional_file.txt		#将所有脚本的第二行内容打印到test/new.txt 文件内
-	   done
+	      done
 		   cat -n ${TMPDIR}/Persional_file.txt > ${TMPDIR}/Persional_file_new.txt		#将文件内的所有内容增加行号， 为后面的
 	   else 
 		   echo "输入有误，退出"
