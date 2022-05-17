@@ -8,4 +8,8 @@ export INTER_NAME=`ip addr  | awk  -F '2:' '{print $2}' |awk  -F ':' '{print $1}
 export INTER_IP=`ip addr | grep  ens33 | awk -F 'inet | brd' ' {print $2}'|sed -n 2p`
 export GATEWAY=`route -n  | grep UG |awk '{print $2}'`
 echo "当前系统 $OS_NAME_VERSION"
+#通用变量
+export PWD=`pwd`
+export TMPDIR=${PWD}/tmp
+export PERSONALDIR=${PWD}/Persional
 }
