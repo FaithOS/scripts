@@ -1,5 +1,5 @@
 #!/bin/bash
-# 配置apt-get源 apt-source
+# 配置apt-get源 apt-source.sh
 
 #
 sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak
