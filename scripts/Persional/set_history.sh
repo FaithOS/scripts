@@ -19,4 +19,7 @@ fi
 HISTTIMEFORMAT="%F %T $USER_IP:`whoami` "     #设置新的显示history的格式
 export HISTTIMEFORMAT
 EOF
-source /etc/profile.d/history.sh
+#在脚本内使用bash 生效环境变量， 当前标签不生效， 需要重新打开一个新的标签就会生效了
+bash /etc/profile.d/history.sh
+
+echo "历史命令设置完毕，当前标签不生效， 需要重新打开一个新的连接标签就会生效."
