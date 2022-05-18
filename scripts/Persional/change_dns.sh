@@ -9,22 +9,25 @@ echo 'nameserver 114.114.114.114' >>/etc/resolv.conf
 
 #解决办法
 
-sudo systemctl stop systemd-resolved
-sudo systemctl disable systemd-resolved
-sudo apt install unbound
-sudo rm -rf /etc/resolv.conf
-sudo vim  /etc/NetworkManager/NetworkManager.conf
+#sudo systemctl stop systemd-resolved
+#sudo systemctl disable systemd-resolved
 
-在[main]
+mv /etc/systemd/resolved.conf /etc/systemd/resolved.conf-backup
+cat >/etc/systemd/resolved.conf<<-EOF
+DNS=114.114.114.114
+LLMNR=no
+EOF
 
-下面添加
+service systemd-resolved restart
 
-dns=unbound
+DEFAUT_YUAN=114.114.114.114
+YUAN=`systemd-resolve --status | awk -F ' ' '/DNS Servers:/ {print $3}' |sed -n 1p`
+if [ $YUAN -eq $DEFAULT_YUAN  ];then
+echo "resolv dns $YUAN is  ok   "
+else
+echo "resolv dns is failed"
+fi
 
-将dns服务替换为unbound
 
-reboot
-
-重启电脑即可，开机查看resolve.conf发现nameserver自动配置
 
 
