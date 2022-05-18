@@ -6,7 +6,7 @@
 ###新的菜单只需要替换 ${SSHDIR} 和ssh 相关的文件即可使用 
 ###二级菜单的环境变量 ${SSHDIR} 在文件check_OS.sh内定义  
 SSH_LIST(){
-	   read -p  "是否要进行个性化设置(YES/NO) :" var
+	   read -p  "是否要进行SSH优化设置(YES/NO) :" var
            echo "######################################"
 	   if [ $var == YES -o $var == yes  ];then
 ##########开始制作菜单
