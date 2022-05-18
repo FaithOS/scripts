@@ -5,7 +5,10 @@
 #历史命令记录日志
 #禁止cat 解析变量
 cat >/etc/profile.d/history.sh<<-"EOF"
+<<<<<<< HEAD
 #HISTFILE=/vat/log/history.log 
+=======
+>>>>>>> fb0743aa2dc0a33c5386e5a1ab89823a2211b131
 #由于bash的history文件默认是覆盖，如果存在多个终端，最后退出的会覆盖以前历史记录，改为追加形式
 shopt -s histappend
 ###
