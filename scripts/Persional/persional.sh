@@ -20,20 +20,17 @@ PERSONAL_LIST(){
 	   do 
 		   sed -n '2p' ${PERSONALDIR}/"$A" >>${TMPDIR}/Persional_file.txt		#将所有脚本的第二行内容打印到test/new.txt 文件内
 	   done
-		   cat -n ${TMPDIR}/Persional_file.txt > ${TMPDIR}/Persional_file_new.txt		#将文件内的所有内容增加行号， 为后面的
 	   else 
 		   echo "输入有误，退出"
 		   exit 0
    	   fi
 
-	  DESCRIBES=`awk  '{print $3}' ${TMPDIR}/Persional_file_new.txt`   #将文件内的第三列为 脚本描述 全部定义到ZD 这个变量内，用于后面对比
+	  DESCRIBES=`awk  '{print $2}' ${TMPDIR}/Persional_file.txt`   #将文件内的第三列为 脚本描述 全部定义到ZD 这个变量内，用于后面对比
 	   PS3="请选择你要执行的数字,或者按0退出 :" 
 	  
-select  NUMM in `awk  '{print $3}' ${TMPDIR}/Persional_file_new.txt`	#这里的NUMM 是中文的描述
-	#	[ $NUMM -eq 0 ]   && break
-	  # read -p "请选择你要执行的数字 :" NUM
+select  NUMM in $DESCRIBES	#这里的NUMM 是中文的描述
 do
-	[ -z  $NUMM ] && echo '#########退出#########' && rm -rf   ${TMPDIR}/Persional_file* && exit 0  # 判断变量是否为空
+	[ -z  $NUMM ] && echo '#########退出#########' && rm -rf   ${TMPDIR}/Persional_file.txt && exit 0  # 判断变量是否为空
 	array=($DESCRIBES)				
 	length=${#array[@]}		#确定变量的个数，然后根据变量个数进行对比 NUMM 的内容， 如果两个内容匹配就调用他的第三段脚本名
 	for ((i=0; i<$length; i++))	#使用for循环对比每一个NUMM的值 是否与array「$i」相同，如果对比成功，
@@ -52,5 +49,4 @@ done
 done
 
 		rm -rf ${TMPDIR}/Persional_file.txt
-		rm -rf ${TMPDIR}/Persional_file_new.txt
 }

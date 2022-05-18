@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 
-for i in ./main_check/*.sh  ; do
+for i in ./main_profile/*.sh  ; do
     if [ -r "$i" ]; then
         if [ "${-#*i}" != "$-" ]; then
             . "$i"
@@ -14,7 +14,7 @@ done
 
 main (){
 
-CHECK_OS
+MY_PROFILE
 CHECK_USER
 SELECT_LIST
 }
