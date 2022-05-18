@@ -10,8 +10,9 @@ export GATEWAY=`route -n  | grep UG |awk '{print $2}'`
 echo "当前系统 $OS_NAME_VERSION"
 #通用变量
 export PWD=`pwd`
+export SDL=${OS_NAME_VERSION}/scripts_dir_list
 export TMPDIR=${PWD}/tmp
 #二级菜单变量
-export PERSONALDIR=${PWD}/Persional
-export SSHDIR=${PWD}/ssh
+export PERSONALDIR=${PWD}/${SDL}/Personal
+export SSHDIR=${PWD}/${SDL}/ssh
 }

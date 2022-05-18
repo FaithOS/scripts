@@ -1,5 +1,5 @@
 #!/bin/bash
-# 个人使用优化 personal.sh
+# 个人使用优化 personal_list.sh
 #
 
 #Persional=PERSONALDIR
@@ -10,8 +10,9 @@ PERSONAL_LIST(){
            echo "######################################"
 	   if [ $var == YES -o $var == yes  ];then
 ##########开始制作菜单
-
+##
 	      for  A in `ls ${PERSONALDIR}`		#查看目录下所有文件名并且赋值A，为当前系统下的所有脚本名称
+		      
 	      do 
 		   sed -n '2p' ${PERSONALDIR}/"$A" >>${TMPDIR}/Persional_file.txt		#将所有脚本的第二行内容打印到test/new.txt 文件内
 	      done
