@@ -7,7 +7,7 @@ SELECT_LIST(){
 	   	if  [ -e "${TMPDIR}"   ]
  		then
                 TMPDIR_NUM=`ls -A "${TMPDIR}" |wc -l`
-		[[ "${TMPDIR_NUM}" -gt 0  ]]  &&  rm -rf  ${TMPDIR}/describe*
+		[[ "${TMPDIR_NUM}" -gt 0  ]]  &&  rm -rf  ${TMPDIR}/describe.txt
                 else
                            mkdir ${TMPDIR}
                 fi
@@ -16,22 +16,23 @@ SELECT_LIST(){
 	   do 
 		   sed -n '2p' ${OS_NAME_VERSION}/"$A" >>${TMPDIR}/describe.txt		#将所有脚本的第二行内容打印到test/new.txt 文件内
 	   done
-		   cat -n ${TMPDIR}/describe.txt > ${TMPDIR}/describe_new.txt		#将文件内的所有内容增加行号， 为后面的
+		   #cat -n ${TMPDIR}/describe.txt > ${TMPDIR}/describe_new.txt		#将文件内的所有内容增加行号， 为后面的
 	   else 
 		   echo "输入有误，退出"
 		   exit 0
    	   fi
 
-	  DESCRIBES=`awk  '{print $3}' ${TMPDIR}/describe_new.txt`   #将文件内的第三列为 脚本描述 全部定义到ZD 这个变量内，用于后面对比
+	  DESCRIBES=`awk  '{print $2}' ${TMPDIR}/describe.txt`   #将文件内的第三列为 脚本描述 全部定义到ZD 这个变量内，用于后面对比
 	   PS3="请选择你要执行的数字,或者按0退出 :" 
 	  
-select  NUMM in `awk  '{print $3}' ${TMPDIR}/describe_new.txt`	#这里的NUMM 是中文的描述
+#select  NUMM in `awk  '{print $3}' ${TMPDIR}/describe_new.txt`	#这里的NUMM 是中文的描述
+select  NUMM in ${DESCRIBES}
 	#	[ $NUMM -eq 0 ]   && break
 	  # read -p "请选择你要执行的数字 :" NUM
 do
-	[ -z  $NUMM ] && echo '#########退出#########' && rm -rf   ${TMPDIR}/describe* && exit 0  # 判断变量是否为空
-	array=($DESCRIBES)				
-	length=${#array[@]}		#确定变量的个数，然后根据变量个数进行对比 NUMM 的内容， 如果两个内容匹配就调用他的第三段脚本名
+	[ -z  $NUMM ] && echo '#########退出#########' && rm -rf   ${TMPDIR}/describe.txt && exit 0  # 判断变量是否为空
+	array=($DESCRIBES)	#这里是将DESCRIBES 里的变量定义成数组，			
+	length=${#array[@]}		#确定数组的元素个数使用@，然后根据变量个数进行对比 NUMM 的内容， 如果两个内容匹配就调用他的第三段脚本名
 	for ((i=0; i<$length; i++))	#使用for循环对比每一个NUMM的值 是否与array「$i」相同，如果对比成功，
 	do
 
@@ -48,5 +49,4 @@ done
 done
 
 		rm -rf ${TMPDIR}/describe.txt
-		rm -rf ${TMPDIR}/describe_new.txt
 }
