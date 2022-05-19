@@ -4,9 +4,9 @@ function PING()
 {
    (ping $1 -W 1 -q -c 3 >/dev/null 2>&1
    if [ $? -eq 0 ];then
-       echo $1 >> /root/success-ip.list
+       echo $1 >> ${TMPDIR}/success-ip.list
    else 
-       echo $1 >> /root/fail-ip.list 	   	
+       echo $1 >> ${TMPDIR}/fail-ip.list 	   	
    fi
    )&
 }
