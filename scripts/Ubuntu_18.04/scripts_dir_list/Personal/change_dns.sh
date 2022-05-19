@@ -8,14 +8,12 @@ echo 'nameserver 114.114.114.114' >>/etc/resolv.conf
 #ubuntu17.0之后特有，systemd-resolvd服务会一直覆盖
 
 #解决办法
+#先备份文件
+cp -r /etc/systemd/resolved.conf /etc/systemd/resolved.conf-backup
 
-#sudo systemctl stop systemd-resolved
-#sudo systemctl disable systemd-resolved
-
-mv /etc/systemd/resolved.conf /etc/systemd/resolved.conf-backup
 cat >/etc/systemd/resolved.conf<<-EOF
+[Resolve]
 DNS=114.114.114.114
-LLMNR=no
 EOF
 
 service systemd-resolved restart
