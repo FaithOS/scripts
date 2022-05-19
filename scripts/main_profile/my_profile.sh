@@ -12,6 +12,8 @@ echo "当前系统 $OS_NAME_VERSION"
 export PWD=`pwd`
 export SDL=${OS_NAME_VERSION}/scripts_dir_list
 export TMPDIR=${PWD}/tmp
+#函数继承
+export -f action			
 #二级菜单变量
 export PERSONALDIR=${PWD}/${SDL}/Personal
 export SSHDIR=${PWD}/${SDL}/ssh

@@ -6,3 +6,14 @@ if [ `id -u` -ne 0 ];then
 fi
 }
 CHECK_USER
+action(){
+        MSG=$1
+        COLOER=`echo $1|sed 's#^.*\[\(.*\)\].*#\1#g'`
+        BASE=`echo $1|sed 's#\(^.*\)\[.*]#\1#g'`
+        if [ "OK" != "$COLOER" ];then
+                echo -e "${BASE} [\e[0;31;1m  $COLOER  \e[0m]"
+        else
+                echo -e "${BASE} [\e[1;32m $COLOER \e[0m]"
+        fi
+}
+action
