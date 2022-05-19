@@ -12,7 +12,8 @@ SELECT_LIST(){
                            mkdir ${TMPDIR}
                 fi
 #############开始制作菜单
-	   for  A in `ls ${OS_NAME_VERSION}`		#赋值A，为当前系统下的所有脚本名称
+	   ONE_LIST=`ls -l ${OS_NAME_VERSION} | grep "^-" |awk '{print $NF}'`
+           for  A in ${ONE_LIST}                #赋值A，为当前系统下的所有脚本名称
 	   do 
 		   sed -n '2p' ${OS_NAME_VERSION}/"$A" >>${TMPDIR}/describe.txt		#将所有脚本的第二行内容打印到test/new.txt 文件内
 	   done
