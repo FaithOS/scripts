@@ -6,19 +6,19 @@
 ###新的菜单只需要替换 ${SSHDIR} 和ssh 相关的文件即可使用 
 ###二级菜单的环境变量 ${SSHDIR} 在文件check_OS.sh内定义  
 SSH_LIST(){
-	   read -p  "是否要进行SSH优化设置(YES/NO) :" var
+	   #read -p  "是否要进行SSH优化设置(YES/NO) :" var
            echo "######################################"
-	   if [ $var == YES -o $var == yes  ];then
+	   #if [ $var == YES -o $var == yes  ];then
 ##########开始制作菜单
 
 	      for  A in `ls ${SSHDIR}`		#查看目录下所有文件名并且赋值A，为当前系统下的所有脚本名称
 	      do 
 		   sed -n '2p' ${SSHDIR}/"$A" >>${TMPDIR}/ssh_file.txt		#将所有脚本的第二行内容打印到test/new.txt 文件内
 	      done
-	   else 
-		   echo "输入有误，退出"
-		   exit 0
-   	   fi
+	   #else 
+	#	   echo "输入有误，退出"
+	#	   exit 0
+   	 #  fi
 
 	  DESCRIBES=`awk  '{print $2}' ${TMPDIR}/ssh_file.txt`   #将文件内的第三列为 脚本描述 全部定义到ZD 这个变量内，用于后面对比
 	   PS3="请选择你要执行的数字,或者按0退出 :" 
