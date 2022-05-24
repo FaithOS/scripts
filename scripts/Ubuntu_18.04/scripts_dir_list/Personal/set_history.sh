@@ -4,23 +4,12 @@
 # export HISTTIMEFORMAT="%F %T `who am i | awk '{ print $1 $5 }'` "
 #历史命令记录日志
 #禁止cat 解析变量
+#cat >/etc/bash.bashrc<<-"EOF"
 cat >/etc/profile.d/history.sh<<-"EOF"
-<<<<<<< HEAD
-#HISTFILE=/vat/log/history.log 
-=======
->>>>>>> fb0743aa2dc0a33c5386e5a1ab89823a2211b131
-#由于bash的history文件默认是覆盖，如果存在多个终端，最后退出的会覆盖以前历史记录，改为追加形式
-shopt -s histappend
-###
-HISTFILESIZE=4000            #默认保存命令是1000条，这里修改为4000条
-HISTSIZE=4000
-USER_IP=`who -u am i 2>/dev/null| awk '{print $NF}'|sed -e 's/[()]//g'` #取得登录客户端的IP
-if [ -z $USER_IP ]
-then
-  USER_IP=`hostname`
-fi
-HISTTIMEFORMAT="%F %T $USER_IP:`whoami` "     #设置新的显示history的格式
-export HISTTIMEFORMAT
+###记录历史命令
+export HISTORY_FILE=/var/log/history.log #自定义历史命令保存文件
+[ -e "$HISTORY_FILE"  ]  && touch "$HISTORY_FILE" chmod o+w "$HISTORY_FILE"
+export PROMPT_COMMAND=' { date "+%Y-%m-%d %T - USER:$USER IP:$SSH_CLIENT PS:$SSH_TTY - $(history 1 | { read x cmd; echo "$cmd"; })"; } >> "$HISTORY_FILE"'
 EOF
 #在脚本内使用bash 生效环境变量， 当前标签不生效， 需要重新打开一个新的标签就会生效了
 bash /etc/profile.d/history.sh
