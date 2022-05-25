@@ -14,7 +14,7 @@ network:
   ethernets:
     ${INTER_NAME}:
       dhcp4: no
-      addresses: [${INTER_IP}]
+      addresses: [${INTER_IPS}]
       optional: true
       gateway4: $GATEWAY
       nameservers:
