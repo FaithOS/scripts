@@ -1,6 +1,6 @@
 #!/bin/bash
 MY_PROFILE(){
-export OS_NAME=`awk -F '"' '/^NAME/{print $2}' /etc/os-release`
+export OS_NAME=`awk -F '"' '/^NAME/{print $2}' /etc/os-release|awk -F ' ' '{print $1}'`
 export OS_VERSION=`awk -F '=|"' '/^VERSION_ID/{print $3}' /etc/os-release`
 export OS_NAME_VERSION=${OS_NAME}_${OS_VERSION}
 #网卡检查
