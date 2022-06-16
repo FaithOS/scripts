@@ -18,9 +18,10 @@ EOF
 
 service systemd-resolved restart
 
-DEFAUT_YUAN=114.114.114.114
+DEFAUT_YUAN="114.114.114.114"
+#DEFAUT_YUN1="$DEFAUT_YUAN"
 YUAN=`systemd-resolve --status | awk -F ' ' '/DNS Servers:/ {print $3}' |sed -n 1p`
-if [ $YUAN -eq $DEFAULT_YUAN  ];then
+if [[ ${YUAN} == ${DEFAUT_YUAN}  ]];then
 echo "resolv dns $YUAN is  ok   "
 else
 echo "resolv dns is failed"
