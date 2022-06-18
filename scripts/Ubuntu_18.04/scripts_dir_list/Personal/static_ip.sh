@@ -2,8 +2,8 @@
 # 配置静态IP static_ip.sh 
 # test1.sh
 #apt-get install chrony -y 
-echo "Ubuntu18.04 配置静态IP  测试ok"
-
+DHCP4=`grep 'dhcp4'  /etc/netplan/00-installer-config.yaml |awk -F  'dhcp4: ' '{print $2}' `
+ [ "${DHCP4}" == 'no' ]  &&  exit 0 
 cp -r /etc/netplan/00-installer-config.yaml  /etc/netplan/00-installer-config.yaml_`date +%F` 
 # EOF 格式
 ###cat >/file.txt<<-EOF #这里的-EOF 表述如果EOF 后面有空格也作为制表符，注意：EOF前后都不应有空格或其他符号。
@@ -23,3 +23,4 @@ network:
 EOF
 
 netplan try
+echo "Ubuntu18.04 配置静态IP  测试ok"
