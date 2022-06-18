@@ -43,7 +43,9 @@ do
 	fi
 done
 done
-
+##制作菜单返回，先删除之前的菜单，防止菜单冲去
 		rm -rf ${TMPDIR}/Persional_file.txt
+		#再次执行菜单，以达到菜单循环的效果
+		PERSONAL_LIST
 }
 PERSONAL_LIST

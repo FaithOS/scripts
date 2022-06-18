@@ -1,7 +1,7 @@
 #!/bin/bash
 # 时间同步 chrony_sync.sh
 
-apt-get  install chronyd -y 
+apt-get  install chrony -y 
 /bin/cp -r /etc/chrony/chrony.conf /etc/chrony/chrony.conf-`date +%F`
 #注释掉之前的时间服务器
 sed -i 's/pool/#pool/g' /etc/chrony/chrony.conf

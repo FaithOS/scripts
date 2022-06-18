@@ -18,14 +18,15 @@ EOF
 
 service systemd-resolved restart
 
-DEFAUT_YUAN=114.114.114.114
+DEFAUT_YUAN="114.114.114.114"
+#DEFAUT_YUN1="$DEFAUT_YUAN"
 YUAN=`systemd-resolve --status | awk -F ' ' '/DNS Servers:/ {print $3}' |sed -n 1p`
-if [ $YUAN -eq $DEFAULT_YUAN  ];then
+if [[ ${YUAN} == ${DEFAUT_YUAN}  ]];then
 echo "resolv dns $YUAN is  ok   "
 else
 echo "resolv dns is failed"
 fi
-
-
+# 后添加的，上面的配置重启后发现resolv.conf配置文件还上会更改回去，加上这条就好了
+ln -snf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 
 

@@ -5,7 +5,6 @@ if [ `id -u` -ne 0 ];then
     echo "This scripts must run with root !!!"
 fi
 }
-CHECK_USER
 action(){
         MSG=$1
         COLOER=`echo $1|sed 's#^.*\[\(.*\)\].*#\1#g'`
@@ -16,4 +15,3 @@ action(){
                 echo -e "${BASE} [\e[1;32m $COLOER \e[0m]"
         fi
 }
-action

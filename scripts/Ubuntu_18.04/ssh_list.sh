@@ -43,6 +43,7 @@ SSH_LIST(){
 		done
 	done
 
-		rm -rf ${TMPDIR}/ssh_file.txt
+rm -rf ${TMPDIR}/ssh_file.txt
+SSH_LIST
 }
 SSH_LIST

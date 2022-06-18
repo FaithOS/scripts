@@ -41,9 +41,10 @@ send "echo $SSH_CLIENT_IP is ok\r "
 expect eof
 EOF
 if [ $? -eq 0 ];then
-action "SSH_CLIENT_IP" /bin/true >> /root/sucess_ip.txt
+action "SSH_CLIENT_IP" /bin/true >> ${TMPDIR}/sucess_ip.txt
 rm -rf ${TMPDIR}/iplist
 else
-action "SSH_CLIENT_IP" /bin/false >> /root/false_ip.txt
+action "SSH_CLIENT_IP" /bin/false >> ${TMPDIR}/false_ip.txt
 fi
 done
+CLEAN

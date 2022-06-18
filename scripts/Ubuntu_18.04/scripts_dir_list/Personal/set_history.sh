@@ -11,6 +11,10 @@ cat >/etc/profile.d/history.sh<<-"EOF"
 export HISTORY_FILE=/var/log/history.log #自定义历史命令保存文件
 export PROMPT_COMMAND=' { date "+%Y-%m-%d %T - USER:$USER IP:$SSH_CLIENT PS:$SSH_TTY - $(history 1 | { read x cmd; echo "$cmd"; })"; } >> "$HISTORY_FILE"'
 EOF
+#多终端同时记录
+#shopt -s histappend
+#实时追加命令记录到文件内
+PROMPT_COMMAND=”history -a”
 #在脚本内使用bash 生效环境变量， 当前标签不生效， 需要重新打开一个新的标签就会生效了
 bash /etc/profile.d/history.sh
 #防止普通用户删除日志文件
