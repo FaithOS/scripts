@@ -1,12 +1,15 @@
 #!/bin/bash
 # 克隆虚拟机后修改IP kvm_clone_ip.sh
 
+<<<<<<< HEAD
 #先判断是否配置了静态IP
 #grep dns /etc/netplan/00-installer-config.yaml 
 
 DHCP4=`grep 'dhcp4'  /etc/netplan/00-installer-config.yaml |awk -F  'dhcp4: ' '{print $2}' `
  [ "${DHCP4}" == 'no' ]  &&  exit 0
 
+=======
+>>>>>>> 77e10ac0978cbfb9759082c63776c970d8224eaf
 #修改主机名
 hostnamectl  set-hostname localhost
 #获取源ip尾数
