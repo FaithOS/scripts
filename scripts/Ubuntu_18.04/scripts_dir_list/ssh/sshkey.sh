@@ -20,7 +20,7 @@ if    [  $var == yes -o $var == YES  ];then
     echo "ok "
 else  [  $var == no -o $var == NO  ]
     echo "退出"
-
+    exit 0	
 fi
 
 
