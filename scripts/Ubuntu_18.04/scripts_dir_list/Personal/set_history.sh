@@ -22,7 +22,7 @@ EOF
 #多终端同时记录
 #shopt -s histappend
 #实时追加命令记录到文件内
-PROMPT_COMMAND=”history -a”
+PROMPT_COMMAND="history -a"
 #在脚本内使用bash 生效环境变量， 当前标签不生效， 需要重新打开一个新的标签就会生效了
 bash /etc/profile.d/history.sh
 #防止普通用户删除或查看日志文件
