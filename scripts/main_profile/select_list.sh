@@ -2,7 +2,7 @@
 SELECT_LIST(){
 	   read -p  "是否要对该系统进行操作(YES/NO) :" var
 
-	   if [ $var == YES -o $var == yes  ];then
+	   if [ $var == YES -o $var == yes -o $var == y ];then
 ####判断tmp 目录是否为空，如果不为空，就删除这个目录重新创建
 	   	if  [ -e "${TMPDIR}"   ]
  		then
