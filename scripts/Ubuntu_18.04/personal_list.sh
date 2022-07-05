@@ -26,7 +26,7 @@ PERSONAL_LIST(){
 	  
 select  NUMM in $DESCRIBES	#这里的NUMM 是中文的描述
 do
-	[ -z  $NUMM ] && echo '#########退出#########' && rm -rf   ${TMPDIR}/Persional_file.txt && exit 0  # 判断变量是否为空
+	[ -z  $NUMM ] && echo '#########退出#########' && rm -rf   ${TMPDIR}/Persional_file.txt  && exit 0  # 判断变量是否为空
 	array=($DESCRIBES)				
 	length=${#array[@]}		#确定变量的个数，然后根据变量个数进行对比 NUMM 的内容， 如果两个内容匹配就调用他的第三段脚本名
 	for ((i=0; i<$length; i++))	#使用for循环对比每一个NUMM的值 是否与array「$i」相同，如果对比成功，
@@ -44,7 +44,9 @@ do
 done
 done
 ##制作菜单返回，先删除之前的菜单，防止菜单冲去
-		rm -rf ${TMPDIR}/Persional_file.txt
+		#rm -rf ${TMPDIR}/Persional_file.txt
+		# 清理tmp垃圾
+		CLEAN
 		#再次执行菜单，以达到菜单循环的效果
 		PERSONAL_LIST
 }
