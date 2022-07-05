@@ -42,8 +42,9 @@ SSH_LIST(){
 	fi
 		done
 	done
-
-rm -rf ${TMPDIR}/ssh_file.txt
-SSH_LIST
+		#清理垃圾
+		CLEAN
+		#再次执行菜单，以达到菜单循环的效果
+		SSH_LIST
 }
 SSH_LIST
