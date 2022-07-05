@@ -17,6 +17,6 @@ main (){
 MY_PROFILE
 CHECK_USER
 SELECT_LIST
-#CLEAN
+CLEAN
 }
 main
