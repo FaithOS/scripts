@@ -2,24 +2,45 @@
 # 个人使用优化 personal_list.sh
 #
 
-#Persional=PERSONALDIR
+#PERSONALDIR 这个变量定义在myprofile.sh文件
 ###新的菜单只需要替换 ${PERSONALDIR} 和Persional 相关的文件即可使用 
 ###二级菜单的环境变量 ${PERSONALDIR} 在文件check_OS.sh内定义  
-PERSONAL_LIST(){
-	 #  read -p  "是否要进行个性化设置(YES/NO) :" var
+#set -e 
+##定义菜单函数
+#CLEAN(){
+# 由于在脚本内使用tar命令 中使用* 通配符， 在shell 执行流程上如果/tmp 路径下有多个文件 会被解析为 'file1' 'file2',这个多个文件， 里面的* 会被解释为'/tmp/*',导致通配符无法使用，所以定义成变量的方式来使用
+#filename_tmp="${TMPDIR}/*"
+#TMP_NUM=`ls -A "${TMPDIR}"|wc -l`
+#if [[ "${TMP_NUM}" -gt 0 ]];then
+# --remove-files  表示在/tmp 创建一个scripts_tmp的包， 并且删除 ./tmp 目录下被打包的源文件
+#  tar cf  /tmp/scripts_tmp_$(date +%H-%M-%S).tar.gz $filename_tmp  --remove-files $filename_tmp
+#else
+#    echo "${TMPDIR} 目录下没有文件"
+#fi
+
+#}
+
+SELECT_lista(){
+  for  A in `ls -al ${PERSONALDIR} | grep "^-"  |awk '{print $9}'`          #查看目录下所有文件名并且赋值A，为当前系统下的所有脚本>名称
+              do
+                   sed -n '2p' ${PERSONALDIR}/"$A" >>${TMPDIR}/Persional_file.txt               #将所有脚本的第二行内容打印到test/new.txt 文件>内
+              done
+
+}
+
+PERSONAL_LIST() {
+
            echo "######################################"
-	  # if [ $var == YES -o $var == yes  ];then
-##########开始制作菜单
-##
-	      for  A in `ls ${PERSONALDIR}`		#查看目录下所有文件名并且赋值A，为当前系统下的所有脚本名称
-		      
-	      do 
-		   sed -n '2p' ${PERSONALDIR}/"$A" >>${TMPDIR}/Persional_file.txt		#将所有脚本的第二行内容打印到test/new.txt 文件内
-	      done
-	   #else 
-	#	   echo "输入有误，退出"
-	#	   exit 0
-   	 #  fi
+##########开始执行菜单
+#THERE_FILE_NUM=`ls  ${TMPDIR}/there_list_pid.txt`
+if  [ -f "${TMPDIR}/there_list_pid.txt" ] ;then
+    echo "返回上一层"
+    CLEAN
+    SELECT_lista;
+else
+    SELECT_lista
+fi
+#####################
 
 	  DESCRIBES=`awk  '{print $2}' ${TMPDIR}/Persional_file.txt`   #将文件内的第三列为 脚本描述 全部定义到ZD 这个变量内，用于后面对比
 	   PS3="请选择你要执行的数字,或者按0退出 :" 
@@ -27,8 +48,8 @@ PERSONAL_LIST(){
 select  NUMM in $DESCRIBES	#这里的NUMM 是中文的描述
 do
 	[ -z  $NUMM ] && echo '#########退出#########' && rm -rf   ${TMPDIR}/Persional_file.txt  && exit 0  # 判断变量是否为空
-	array=($DESCRIBES)				
-	length=${#array[@]}		#确定变量的个数，然后根据变量个数进行对比 NUMM 的内容， 如果两个内容匹配就调用他的第三段脚本名
+	array=($DESCRIBES)			
+	length=${#array[@]}	#确定变量的个数，然后根据变量个数进行对比 NUMM 的内容， 如果两个内容匹配就调用他的第三段脚本名
 	for ((i=0; i<$length; i++))	#使用for循环对比每一个NUMM的值 是否与array「$i」相同，如果对比成功，
 	do
 
@@ -46,8 +67,9 @@ done
 ##制作菜单返回，先删除之前的菜单，防止菜单冲去
 		#rm -rf ${TMPDIR}/Persional_file.txt
 		# 清理tmp垃圾
-		CLEAN
+	        CLEAN
 		#再次执行菜单，以达到菜单循环的效果
 		PERSONAL_LIST
+
 }
 PERSONAL_LIST

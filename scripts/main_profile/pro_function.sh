@@ -5,10 +5,10 @@ filename_tmp="${TMPDIR}/*"
 TMP_NUM=`ls -A "${TMPDIR}"|wc -l`
 if [[ "${TMP_NUM}" -gt 0 ]];then
 # --remove-files  表示在/tmp 创建一个scripts_tmp的包， 并且删除 ./tmp 目录下被打包的源文件
-  tar cvf  /tmp/scripts_tmp_$(date +%H-%M-%S).tar.gz $filename_tmp  --remove-files $filename_tmp
+  tar cf  /tmp/scripts_tmp_$(date +%H-%M-%S).tar.gz $filename_tmp  --remove-files $filename_tmp  >>/dev/null
 else
     echo "${TMPDIR} 目录下没有文件"
- retun=$?    
 fi
 
 }
+export -f CLEAN

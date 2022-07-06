@@ -1,2 +1,0 @@
-# 个人使用优化 personal_list.sh
-# ssh优化 ssh_list.sh
