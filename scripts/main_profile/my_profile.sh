@@ -17,7 +17,7 @@ export TMPDIR=${PWD}/tmp
 export -f action			
 #二级菜单变量
 export PERSONALDIR=${PWD}/${SDL}/Personal
-export SSHDIR=${PWD}/${SDL}/ssh
+export SSH_DIR=${PWD}/${SDL}/ssh
 #三级菜单变量
 export VIMDIR=${PERSONALDIR}/VIM
 }
