@@ -1,5 +1,5 @@
 #!/bin/bash
-# ssh优化 SSH_list.sh
+# SSH服务 SSH_list.sh
 #
 
 #ssh=SSH
