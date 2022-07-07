@@ -1,5 +1,5 @@
 #!/bin/bash
-# ssh优化 ssh_list.sh
+# ssh优化 SSH_list.sh
 #
 
 #ssh=SSH
@@ -11,9 +11,9 @@ SSH_LIST(){
 	   #if [ $var == YES -o $var == yes  ];then
 ##########开始制作菜单
 
-	      for  A in `ls ${SSHDIR}`		#查看目录下所有文件名并且赋值A，为当前系统下的所有脚本名称
+	      for  A in `ls ${SSH_DIR}`		#查看目录下所有文件名并且赋值A，为当前系统下的所有脚本名称
 	      do 
-		   sed -n '2p' ${SSHDIR}/"$A" >>${TMPDIR}/SSH_file.txt		#将所有脚本的第二行内容打印到test/new.txt 文件内
+		   sed -n '2p' ${SSH_DIR}/"$A" >>${TMPDIR}/SSH_file.txt		#将所有脚本的第二行内容打印到test/new.txt 文件内
 	      done
 	   #else 
 	#	   echo "输入有误，退出"
