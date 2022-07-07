@@ -34,11 +34,11 @@ PERSONAL_LIST() {
 ##########开始执行菜单
 #THERE_FILE_NUM=`ls  ${TMPDIR}/there_list_pid.txt`
 if  [ -f "${TMPDIR}/there_list_pid.txt" ] ;then
-    echo -e "\033[31m   "返回上一层" \033[0m"
+    echo -e "\033[31m   "返回上一层" \033[0m"  #这里根本执行不到， 因为下面的clean 会删除there_list_pid.txt 这个文件。
     CLEAN
     SELECT_lista
-else
-    SELECT_lista
+else			
+    SELECT_lista		#都执行的这个三级菜单，上面的if 下的select——lista 没有执行，以后写根据there_list_pid.txt内不同的值CLEAN 函数，做不同的操作，
 fi
 #####################
 
