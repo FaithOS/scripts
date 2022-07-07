@@ -34,7 +34,7 @@ PERSONAL_LIST() {
 ##########开始执行菜单
 #THERE_FILE_NUM=`ls  ${TMPDIR}/there_list_pid.txt`
 if  [ -f "${TMPDIR}/there_list_pid.txt" ] ;then
-    echo "返回上一层"
+    echo -e "\033[31m   "返回上一层" \033[0m"
     CLEAN
     SELECT_lista;
 else
