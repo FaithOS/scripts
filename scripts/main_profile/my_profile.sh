@@ -10,14 +10,16 @@ export INTER_IP=`ip addr  | grep  "$INTER_NAME" | awk -F ' '  '/inet / {print $2
 export GATEWAY=`route -n  | grep UG |awk '{print $2}'`
 echo "当前系统 $OS_NAME_VERSION"
 #通用变量
-export PWD=`pwd`
 export SDL=${OS_NAME_VERSION}/scripts_dir_list
 export TMPDIR=${PWD}/tmp
+export scripts_DIR=$(cd $(dirname $0) && pwd )
 #函数继承
-export -f action			
+export -f action                        
 #二级菜单变量
-export PERSONALDIR=${PWD}/${SDL}/Personal
-export SSH_DIR=${PWD}/${SDL}/ssh
+export PERSONALDIR=${scripts_DIR}/${SDL}/Personal
+export SSHDIR=${scripts_DIR}/${SDL}/ssh
+export zabbixDIR=${scripts_DIR}/${SDL}/zabbix
+export zabbixDIR=${scripts_DIR}/${SDL}/zabbix
 #三级菜单变量
 export VIMDIR=${PERSONALDIR}/VIM
 }
