@@ -17,9 +17,7 @@ export scripts_DIR=$(cd $(dirname $0) && pwd )
 export -f action                        
 #二级菜单变量
 export PERSONALDIR=${scripts_DIR}/${SDL}/Personal
-export SSHDIR=${scripts_DIR}/${SDL}/ssh
-export zabbixDIR=${scripts_DIR}/${SDL}/zabbix
-export zabbixDIR=${scripts_DIR}/${SDL}/zabbix
+export SSH_DIR=${scripts_DIR}/${SDL}/ssh
 #三级菜单变量
 export VIMDIR=${PERSONALDIR}/VIM
 }
