@@ -23,6 +23,7 @@ VIM_LIST(){
 	#	   exit 0
    	 #  fi
 
+	  echo 1 >${TMPDIR}/there_list_pid.txt
 	  DESCRIBES=`awk  '{print $2}' ${TMPDIR}/VIM_file.txt`   #将文件内的第三列为 脚本描述 全部定义到ZD 这个变量内，用于后面对比
 	   PS3="请选择你要执行的数字,或者按0退出 :" 
 	  
@@ -37,11 +38,11 @@ do
 	if [ $NUMM == "${array[$i]}" ]; then		#i是自增次数， 
 		echo "正在执行脚本，请稍后......"
 		# 如果NUMM等于array下标值，那么可以确定脚本表述，过滤脚本描述后面的脚本名称，给脚本名称重新赋值变量，然后再运行这个新赋值的变量（这里也就是脚本名称）
-		implement_scripts=`grep "${array[$i]}"  ${TMPDIR}/vim_file.txt |awk -F "${array[$i]}" '{print $2}'`  #如果对比成功就讲这个值得第二列取出，
+		implement_scripts=`grep "${array[$i]}"  ${TMPDIR}/VIM_file.txt |awk -F "${array[$i]}" '{print $2}'`  #如果对比成功就讲这个值得第二列取出，
 		cd ${VIMDIR}
 
 		bash ${implement_scripts}
-		echo 1 >${TMPDIR}/there_list_pid.txt
+		echo 2 >${TMPDIR}/there_list_pid.txt
 		break 2
 	fi
 done
