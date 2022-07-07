@@ -6,7 +6,7 @@ echo ${SDL}
 echo '#'
 #添加二级菜单变量
 sed -i '/SSHDIR/a\export '"${new_name}"'DIR=${scripts_DIR}/${SDL}/'"${new_name}"'' ${scripts_DIR}/main_profile/my_profile.sh
-/bin/cp -r  ${scripts_DIR}/${OS_NAME_VERSION}/ssh_list.sh ${scripts_DIR}/${OS_NAME_VERSION}/${new_name}.sh
+/bin/cp -r  ${scripts_DIR}/${OS_NAME_VERSION}/SSH_list.sh ${scripts_DIR}/${OS_NAME_VERSION}/${new_name}.sh
 sed -i 's/SSH/'"${new_name}"'/g' ${scripts_DIR}/${OS_NAME_VERSION}/${new_name}.sh
 mkdir  ${scripts_DIR}/${SDL}/${new_name}
 
