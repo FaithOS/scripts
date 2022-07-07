@@ -36,7 +36,7 @@ PERSONAL_LIST() {
 if  [ -f "${TMPDIR}/there_list_pid.txt" ] ;then
     echo -e "\033[31m   "返回上一层" \033[0m"
     CLEAN
-    SELECT_lista;
+    SELECT_lista
 else
     SELECT_lista
 fi
