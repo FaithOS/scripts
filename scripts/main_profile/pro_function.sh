@@ -18,6 +18,7 @@ export -f CLEAN
 
 ###颜色函数
 #在脚本内调用 方式 color red ”输出内容“
+#例如 ：set_vim.sh 内使用方式
 #其中color 代替颜色， red代替了 echo -e 的效果，因为$1等于red 就执行 echo -e ”颜色“ ”输出内容“ ”RES“
 color(){
 RED_COLOR='\033[31m'
