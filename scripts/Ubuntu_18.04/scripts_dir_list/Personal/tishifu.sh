@@ -1,7 +1,7 @@
 #!/bin/bash
 # Ubuntu命令提示符 tishifu.sh
 set -e
-
+#
 /bin/cp -r /etc/bash.bashrc /etc/bash.bashrc.backup
 sed -i  '21s/w/&]/g'  /etc/bash.bashrc
 sed -i  '21s/\}/&[/g'  /etc/bash.bashrc
