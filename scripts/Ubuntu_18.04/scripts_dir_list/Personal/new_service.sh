@@ -2,7 +2,6 @@
 # 添加新服务 new_service.sh
 set -e
 read -p "请输入你要创建的名称，小写字母，不能有空格": new_name
-echo ${SDL}
 echo '#'
 #添加二级菜单变量
 sed -i '/SSH_DIR/a\export '"${new_name}"'_DIR=${scripts_DIR}/${SDL}/'"${new_name}"'' ${scripts_DIR}/main_profile/my_profile.sh`
