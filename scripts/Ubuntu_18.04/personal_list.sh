@@ -21,9 +21,9 @@
 #}
 
 SELECT_lista(){
-  for A in `ls -al ${PERSONALDIR} | grep "^-"  |awk '{print $9}'`          #查看目录下所有文件名并且赋值A，为当前系统下的所有脚本>名称
+  for A in `ls -al ${PERSONAL_DIR} | grep "^-"  |awk '{print $9}'`          #查看目录下所有文件名并且赋值A，为当前系统下的所有脚本>名称
     do
-      sed -n '2p' ${PERSONALDIR}/"$A" >>${TMPDIR}/Persional_file.txt               #将所有脚本的第二行内容打印到test/new.txt 文件
+      sed -n '2p' ${PERSONAL_DIR}/"$A" >>${TMPDIR}/Persional_file.txt               #将所有脚本的第二行内容打印到test/new.txt 文件
   done 
 }
 
@@ -55,7 +55,7 @@ do
 	    echo "正在执行脚本，请稍后......"
 		# 如果NUMM等于array下标值，那么可以确定脚本表述，过滤脚本描述后面的脚本名称，给脚本名称重新赋值变量，然后再运行这个新赋值的变量（这里也就是脚本名称）
 	    implement_scripts=`grep "${array[$i]}"  ${TMPDIR}/Persional_file.txt |awk -F "${array[$i]}" '{print $2}'`  #如果对比成功就讲这个值得第二列取出，
-	    cd ${PERSONALDIR}
+	    cd ${PERSONAL_DIR}
 	    bash ${implement_scripts}
 	    break 2
 	fi

@@ -10,9 +10,9 @@
 VIM_LIST(){
 echo "######################################"
 ##########开始制作菜单
-for A in `ls ${VIMDIR}`	
+for A in `ls ${VIM_DIR}`	
    do 
-      sed -n '2p' ${VIMDIR}/"$A" >>${TMPDIR}/VIM_file.txt
+      sed -n '2p' ${VIM_DIR}/"$A" >>${TMPDIR}/VIM_file.txt
 done
 ######菜单返回功能
 echo 3 >${TMPDIR}/there_list_pid.txt
@@ -29,7 +29,7 @@ do
 	if [ $NUMM == "${array[$i]}" ]; then	
 	    echo "正在执行脚本，请稍后......"
 	    implement_scripts=`grep "${array[$i]}"  ${TMPDIR}/VIM_file.txt |awk -F "${array[$i]}" '{print $2}'` 
-	    cd ${VIMDIR}
+	    cd ${VIM_DIR}
 	    bash ${implement_scripts}
 	    #echo 2 >${TMPDIR}/there_list_pid.txt
 	    break 2

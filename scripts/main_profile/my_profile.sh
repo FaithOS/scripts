@@ -16,8 +16,8 @@ export scripts_DIR=$(cd $(dirname $0) && pwd )
 #函数继承
 export -f action                        
 #二级菜单变量
-export PERSONALDIR=${scripts_DIR}/${SDL}/Personal
+export PERSONAL_DIR=${scripts_DIR}/${SDL}/Personal
 export SSH_DIR=${scripts_DIR}/${SDL}/ssh
 #三级菜单变量
-export VIMDIR=${PERSONALDIR}/VIM
+export VIM_DIR=${PERSONAL_DIR}/VIM
 }
