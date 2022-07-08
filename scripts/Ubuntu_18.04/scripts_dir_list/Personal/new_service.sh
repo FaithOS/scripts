@@ -11,8 +11,8 @@ sed -i 's/SSH/'"${new_name}"'/g' ${scripts_DIR}/${OS_NAME_VERSION}/${new_name}_l
 mkdir  ${scripts_DIR}/${SDL}/${new_name}
 
 
-cat >>${scripts_DIR}/${SDL}/${new_name}/test.sh<<EOF
+cat >>${scripts_DIR}/${SDL}/${new_name}/test.sh<<-EOF
 #!/bin/bash
-# $「new_name}测试 test.sh
- color red  "${new_name} 配置成功 " 
+# ${new_name}测试 test.sh
+ color red  ${new_name} 配置成功  
 EOF
