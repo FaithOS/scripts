@@ -15,3 +15,27 @@ fi
 }
 #让函数成为全局函数， 这样子进程脚本就可以继承这个函数了
 export -f CLEAN
+
+###颜色函数
+#在脚本内调用 方式 color red ”输出内容“
+#其中color 代替颜色， red代替了 echo -e 的效果，因为$1等于red 就执行 echo -e ”颜色“ ”输出内容“ ”RES“
+color(){
+RED_COLOR='\033[31m'
+GREEN_COLOR='\033[32m'
+YELLOW_COLOR='\033[33m'
+BLUE_COLOR='\033[34m'
+PINK='\033[35m'
+RES='\033[0m'
+if [ "$1" = "red" ];then
+    echo -e "${RED_COLOR}$2 $RES"
+elif [ "$1" = "green" ];then
+    echo -e "${GREEN_COLOR}$2 $RES"
+elif [ "$1" = "yellow" ];then
+        echo -e "${YELLOW_COLOR}$2 $RES"
+elif [ "$1" = "blue" ];then
+        echo -e "${BLUE_COLOR}$2 $RES"
+elif [ "$1" = "pink" ];then
+    echo -e "${PINK}$2 $RES"
+fi
+}
+export -f color
