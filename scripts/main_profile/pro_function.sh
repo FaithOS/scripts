@@ -42,3 +42,7 @@ elif [ "$1" = "pink" ];then
 fi
 }
 export -f color
+MY_OS(){
+echo "当前系统 $OS_NAME_VERSION"
+}
+

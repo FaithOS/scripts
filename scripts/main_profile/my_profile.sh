@@ -8,7 +8,6 @@ export INTER_NAME=`ip addr  | awk  -F '2:' '{print $2}' |awk  -F ':' '{print $1}
 export INTER_IPS=`ip addr | grep  "$INTER_NAME" | awk -F 'inet | brd' ' {print $2}'|sed -n 2p`
 export INTER_IP=`ip addr  | grep  "$INTER_NAME" | awk -F ' '  '/inet / {print $2}' |awk -F '/' '{print $1}'`
 export GATEWAY=`route -n  | grep UG |awk '{print $2}'`
-echo "当前系统 $OS_NAME_VERSION"
 #通用变量
 export SDL=${OS_NAME_VERSION}/scripts_dir_list
 export TMPDIR=${PWD}/tmp
