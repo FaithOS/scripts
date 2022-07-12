@@ -17,7 +17,8 @@ SELECT_LIST(){
           fi
    else
         CLEAN
-       cd ${scripts_DIR}
+        cd ${scripts_DIR}
+	declare -i  MY_PROFILE
    fi
 #############开始制作菜单
 	   ONE_LIST=`ls -l ${OS_NAME_VERSION} | grep "^-" |awk '{print $NF}'`
@@ -46,7 +47,6 @@ do
 		# 如果NUMM等于array下标值，那么可以确定脚本表述，过滤脚本描述后面的脚本名称，给脚本名称重新赋值变量，然后再运行这个新赋值的变量（这里也就是脚本名称）
 		implement_scripts=`grep "${array[$i]}"  ${TMPDIR}/describe.txt |awk -F "${array[$i]}" '{print $2}'`  #如果对比成功就讲这个值得第二列取出，
 		cd ${OS_NAME_VERSION}
-
 		bash ${implement_scripts}
 		break 2
 	fi

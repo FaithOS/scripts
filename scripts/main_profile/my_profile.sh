@@ -15,9 +15,12 @@ export TMPDIR=${PWD}/tmp
 export scripts_DIR=$(cd $(dirname $0) && pwd )
 #函数继承
 export -f action                        
+#export -f MY_PROFILE
 #二级菜单变量
 export PERSONAL_DIR=${scripts_DIR}/${SDL}/Personal
 export SSH_DIR=${scripts_DIR}/${SDL}/ssh
+export zabbix_DIR=${scripts_DIR}/${SDL}/zabbix
+export zabbix_DIR=${scripts_DIR}/${SDL}/zabbix
 #三级菜单变量
 export VIM_DIR=${PERSONAL_DIR}/VIM
 }
