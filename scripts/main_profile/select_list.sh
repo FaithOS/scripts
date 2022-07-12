@@ -1,16 +1,24 @@
 #!/bin/bash
 SELECT_LIST(){
-	   read -p  "是否要对该系统进行操作(YES/NO) :" var
-
-	   if [ $var == YES -o $var == yes -o $var == y ];then
+  if [ ! -f ${TMPDIR}/there_list_pid.txt     ];then
+   read -p  "是否要对该系统进行操作(YES/NO) :" var
+         if [ $var == YES -o $var == yes -o $var == y ];then
 ####判断tmp 目录是否为空，如果不为空，就删除这个目录重新创建
-	   	if  [ -e "${TMPDIR}"   ]
- 		then
-                TMPDIR_NUM=`ls -A "${TMPDIR}" |wc -l`
-		[[ "${TMPDIR_NUM}" -gt 0  ]]  &&  rm -rf  ${TMPDIR}/describe.txt
+                if  [ -e "${TMPDIR}"   ]
+                then
+                TMPDIR_NUM=$(ls -A "${TMPDIR}" |wc -l)
+                [[ "${TMPDIR_NUM}" -gt 0  ]]  &&  rm   ${TMPDIR}/*
                 else
                            mkdir ${TMPDIR}
                 fi
+          else
+              echo "输入有误，退出"
+              exit 0
+          fi
+   else
+        CLEAN
+       cd ${scripts_DIR}
+   fi
 #############开始制作菜单
 	   ONE_LIST=`ls -l ${OS_NAME_VERSION} | grep "^-" |awk '{print $NF}'`
            for  A in ${ONE_LIST}                #赋值A，为当前系统下的所有脚本名称
@@ -18,10 +26,6 @@ SELECT_LIST(){
 		   sed -n '2p' ${OS_NAME_VERSION}/"$A" >>${TMPDIR}/describe.txt		#将所有脚本的第二行内容打印到test/new.txt 文件内
 	   done
 		   #cat -n ${TMPDIR}/describe.txt > ${TMPDIR}/describe_new.txt		#将文件内的所有内容增加行号， 为后面的
-	   else 
-		   echo "输入有误，退出"
-		   exit 0
-   	   fi
 
 	  DESCRIBES=`awk  '{print $2}' ${TMPDIR}/describe.txt`   #将文件内的第三列为 脚本描述 全部定义到ZD 这个变量内，用于后面对比
 	   PS3="请选择你要执行的数字,或者按0退出 :" 
@@ -48,6 +52,6 @@ do
 	fi
 done
 done
-
-		rm -rf ${TMPDIR}/describe.txt
+   SELECT_LIST
+   CLEAN
 }
