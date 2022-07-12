@@ -1,5 +1,5 @@
 #!/bin/bash
-MY_PROFILE(){
+#MY_PROFILE(){
 export OS_NAME=`awk -F '"' '/^NAME/{print $2}' /etc/os-release|awk -F ' ' '{print $1}'`
 export OS_VERSION=`awk -F '=|"' '/^VERSION_ID/{print $3}' /etc/os-release`
 export OS_NAME_VERSION=${OS_NAME}_${OS_VERSION}
@@ -20,7 +20,6 @@ export -f action
 export PERSONAL_DIR=${scripts_DIR}/${SDL}/Personal
 export SSH_DIR=${scripts_DIR}/${SDL}/ssh
 export zabbix_DIR=${scripts_DIR}/${SDL}/zabbix
-export zabbix_DIR=${scripts_DIR}/${SDL}/zabbix
 #三级菜单变量
 export VIM_DIR=${PERSONAL_DIR}/VIM
-}
+#}

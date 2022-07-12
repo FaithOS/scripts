@@ -13,8 +13,8 @@ done
 
 
 main (){
-
-MY_PROFILE
+echo "当前系统 $OS_NAME_VERSION"
+#MY_PROFILE
 CHECK_USER
 SELECT_LIST
 CLEAN
