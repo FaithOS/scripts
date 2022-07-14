@@ -12,7 +12,7 @@ mv /usr/local/sersync/confxml.xml /usr/local/sersync/conf/
 export PATH=$PATH:/usr/local/sersync/bin 
 source /etc/profile
 
-echo "vm@u7i8o9p0" > /etc/rsync.password
+echo "123123" > /etc/rsync.password
 chmod 600 /etc/rsync.password 
 #sersync2 -d -r -o /usr/local/sersync/conf/confxml.xml 
 if [ -f /usr/local/sersync/conf/confxml.xml   ];then
