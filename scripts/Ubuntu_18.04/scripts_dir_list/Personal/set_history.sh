@@ -21,6 +21,9 @@ export PROMPT_COMMAND=' { date "+%Y-%m-%d %T  - IP:"$my_ip" - PS:"$my_pts" - ["$
 EOF
 #多终端同时记录
 #shopt -s histappend
+#记录错误操作，记录空格起始的命令，默认HISTCONTROL 忽略这些内容了。
+/bin/cp /root/.bashrc /root/.bashrc-set_history_backup
+sed -i 's/HISTCONTROL/#&/' /root/.bashrc 
 #实时追加命令记录到文件内
 PROMPT_COMMAND="history -a"
 #在脚本内使用bash 生效环境变量， 当前标签不生效， 需要重新打开一个新的标签就会生效了
