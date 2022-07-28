@@ -18,6 +18,7 @@ export -f action
 #二级菜单变量
 export PERSONAL_DIR=${scripts_DIR}/${SDL}/Personal
 export SSH_DIR=${scripts_DIR}/${SDL}/ssh
+export mysql_DIR=${scripts_DIR}/${SDL}/mysql
 export zabbix_DIR=${scripts_DIR}/${SDL}/zabbix
 #三级菜单变量
 export VIM_DIR=${PERSONAL_DIR}/VIM
