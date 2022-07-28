@@ -1,5 +1,5 @@
 #!/bin/bash
-# 添加新服务 new_service.sh
+# 添加二级菜单 new_service.sh
 set -e
 read -p "请输入你要创建的名称，小写字母，不能有空格": new_name
 #添加二级菜单变量
