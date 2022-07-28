@@ -38,9 +38,13 @@ mysql -e "grant all privileges on zabbix.* to zabbix@${zabbix_ip};"
 #修改mysql配置文件
 sed -i "s/bind-address		= 127.0.0.1/bind-address		= ${zabbix_ip}/g" /etc/mysql/mysql.conf.d/mysqld.cnf
 
+......
+#配置zabbix 前端
+mkdir /var/www/html/zabbix
+cd /usr/local/src/zabbix-4.0.42/frontends/php/
+/bin/cp -a * /var/www/html/zabbix/ 
 
-
-
+#修改php 时间
 
 
 
